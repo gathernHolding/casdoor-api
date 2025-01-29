@@ -2,32 +2,31 @@
 
 namespace Gathern\CasdoorAPI\Requests\VerificationApi;
 
-use DateTime;
-use Pest\Support\Str;
+use Gathern\CasdoorAPI\Requests\MainRequest;
 use Saloon\Contracts\Body\HasBody;
+use Saloon\Data\MultipartValue;
 use Saloon\Enums\Method;
-use Saloon\Http\Request;
-use Saloon\Traits\Body\HasJsonBody;
+use Saloon\Traits\Body\HasMultipartBody;
 
 /**
  * ApiController.SendVerificationCode
  */
-class ApiControllerSendVerificationCode extends Request implements HasBody
+class ApiControllerSendVerificationCode extends MainRequest implements HasBody
 {
-    use HasJsonBody;
+    use HasMultipartBody;
 
     protected Method $method = Method::POST;
 
     public function resolveEndpoint(): string
     {
-        return "/api/send-verification-code";
+        return '/api/send-verification-code';
     }
 
     public function __construct(
         public string $dest,
         public string $applicationId,
-        public string $type = "phone",
-        public string $captchaType = "none",
+        public string $type = 'phone',
+        public string $captchaType = 'none',
         public ?string $optMethod = null,
         public ?string $countryCode = null,
         public ?bool $checkUser = null
@@ -36,18 +35,23 @@ class ApiControllerSendVerificationCode extends Request implements HasBody
     /**
      * Default body
      *
-     * @return array<string, mixed>
+     * @return  MultipartValue[]
      */
     protected function defaultBody(): array
     {
-        return [
-            "dest" => $this->dest,
-            "applicationId" => $this->applicationId,
-            "type" => $this->type,
-            "captchaType" => $this->captchaType,
-            "method" => $this->optMethod,
-            "countryCode" => $this->countryCode,
-            "checkUser" => $this->checkUser,
+        $data = [
+            'dest' => $this->dest,
+            'applicationId' => $this->applicationId,
+            'type' => $this->type,
+            'captchaType' => $this->captchaType,
+            'method' => $this->optMethod,
+            'countryCode' => $this->countryCode,
+            'checkUser' => $this->checkUser,
         ];
+
+        return array_map(
+            callback:fn ($key): MultipartValue => new MultipartValue(name: $key, value:(string) $data[$key]),
+             array:array_keys(array_filter($data))
+            );
     }
 }

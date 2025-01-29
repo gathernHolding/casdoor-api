@@ -2,10 +2,9 @@
 
 namespace Gathern\CasdoorAPI\Requests\SyncerApi;
 
-use DateTime;
+use Gathern\CasdoorAPI\Requests\MainRequest;
 use Saloon\Contracts\Body\HasBody;
 use Saloon\Enums\Method;
-use Saloon\Http\Request;
 use Saloon\Traits\Body\HasJsonBody;
 
 /**
@@ -13,30 +12,26 @@ use Saloon\Traits\Body\HasJsonBody;
  *
  * update syncer
  */
-class ApiControllerUpdateSyncer extends Request implements HasBody
+class ApiControllerUpdateSyncer extends MainRequest implements HasBody
 {
-	use HasJsonBody;
+    use HasJsonBody;
 
-	protected Method $method = Method::POST;
+    protected Method $method = Method::POST;
 
+    public function resolveEndpoint(): string
+    {
+        return '/api/update-syncer';
+    }
 
-	public function resolveEndpoint(): string
-	{
-		return "/api/update-syncer";
-	}
+    /**
+     * @param  mixed  $id  The id ( owner/name ) of the syncer
+     */
+    public function __construct(
+        protected mixed $id,
+    ) {}
 
-
-	/**
-	 * @param mixed $id The id ( owner/name ) of the syncer
-	 */
-	public function __construct(
-		protected mixed $id,
-	) {
-	}
-
-
-	public function defaultQuery(): array
-	{
-		return array_filter(['id' => $this->id]);
-	}
+    public function defaultQuery(): array
+    {
+        return array_filter(['id' => $this->id]);
+    }
 }

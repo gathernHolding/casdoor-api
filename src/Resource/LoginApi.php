@@ -12,7 +12,6 @@ use Gathern\CasdoorAPI\Requests\LoginApi\ApiControllerLogout;
 use Gathern\CasdoorAPI\Requests\LoginApi\ApiControllerSignup;
 use Gathern\CasdoorAPI\Requests\LoginApi\ApiControllerUnlink;
 use Gathern\CasdoorAPI\Requests\LoginApi\ApiControllerWebAuthnSigninBegin;
-use Gathern\CasdoorAPI\Requests\LoginApi\ApiControllerWebAuthnSigninFinish;
 use Gathern\CasdoorAPI\Resource;
 use Saloon\Contracts\Body\HasBody;
 use Saloon\Http\Response;
@@ -21,12 +20,13 @@ use Saloon\Traits\Body\HasJsonBody;
 class LoginApi extends Resource implements HasBody
 {
     use HasJsonBody;
+
     /**
-     * @param mixed $clientId client id
-     * @param mixed $responseType response type
-     * @param mixed $redirectUri redirect uri
-     * @param mixed $scope scope
-     * @param mixed $state state
+     * @param  mixed  $clientId  client id
+     * @param  mixed  $responseType  response type
+     * @param  mixed  $redirectUri  redirect uri
+     * @param  mixed  $scope  scope
+     * @param  mixed  $state  state
      */
     public function apiControllerGetApplicationLogin(
         mixed $clientId,
@@ -48,26 +48,20 @@ class LoginApi extends Resource implements HasBody
 
     public function apiControllerGetCaptcha(): Response
     {
-        return $this->connector->send(new ApiControllerGetCaptcha());
+        return $this->connector->send(new ApiControllerGetCaptcha);
     }
 
     /**
-     * @param mixed $clientId clientId
-     * @param mixed $responseType responseType
-     * @param mixed $redirectUri redirectUri
-     * @param mixed $scope scope
-     * @param mixed $state state
-     * @param mixed $nonce nonce
-     * @param mixed $codeChallengeMethod code_challenge_method
-     * @param mixed $codeChallenge code_challenge
+     * @throws \Saloon\Exceptions\Request\FatalRequestException
+     * @throws \Saloon\Exceptions\Request\RequestException
      */
     public function apiControllerLogin(
         string $application,
         string $username,
         SignInMethod $signinMethod = SignInMethod::VerificationCode,
         LoginType $type = LoginType::TOKEN,
-        string $password = null,
-        string $code = null,
+        ?string $password = null,
+        ?string $code = null,
     ): Response {
         return $this->connector->send(
             new ApiControllerLogin(
@@ -83,13 +77,13 @@ class LoginApi extends Resource implements HasBody
 
     public function apiControllerIntrospectToken(): Response
     {
-        return $this->connector->send(new ApiControllerIntrospectToken());
+        return $this->connector->send(new ApiControllerIntrospectToken);
     }
 
     /**
-     * @param mixed $idTokenHint id_token_hint
-     * @param mixed $postLogoutRedirectUri post_logout_redirect_uri
-     * @param mixed $state state
+     * @param  mixed  $idTokenHint  id_token_hint
+     * @param  mixed  $postLogoutRedirectUri  post_logout_redirect_uri
+     * @param  mixed  $state  state
      */
     public function apiControllerLogout(
         mixed $idTokenHint,
@@ -107,17 +101,17 @@ class LoginApi extends Resource implements HasBody
 
     public function apiControllerSignup(): Response
     {
-        return $this->connector->send(new ApiControllerSignup());
+        return $this->connector->send(new ApiControllerSignup);
     }
 
     public function apiControllerUnlink(): Response
     {
-        return $this->connector->send(new ApiControllerUnlink());
+        return $this->connector->send(new ApiControllerUnlink);
     }
 
     /**
-     * @param mixed $owner owner
-     * @param mixed $name name
+     * @param  mixed  $owner  owner
+     * @param  mixed  $name  name
      */
     public function apiControllerWebAuthnSigninBegin(
         mixed $owner,
@@ -127,5 +121,4 @@ class LoginApi extends Resource implements HasBody
             new ApiControllerWebAuthnSigninBegin($owner, $name)
         );
     }
-
 }

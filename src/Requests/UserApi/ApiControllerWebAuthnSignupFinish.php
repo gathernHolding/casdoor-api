@@ -2,10 +2,9 @@
 
 namespace Gathern\CasdoorAPI\Requests\UserApi;
 
-use DateTime;
+use Gathern\CasdoorAPI\Requests\MainRequest;
 use Saloon\Contracts\Body\HasBody;
 use Saloon\Enums\Method;
-use Saloon\Http\Request;
 use Saloon\Traits\Body\HasJsonBody;
 
 /**
@@ -13,20 +12,16 @@ use Saloon\Traits\Body\HasJsonBody;
  *
  * WebAuthn Registration Flow 2nd stage
  */
-class ApiControllerWebAuthnSignupFinish extends Request implements HasBody
+class ApiControllerWebAuthnSignupFinish extends MainRequest implements HasBody
 {
-	use HasJsonBody;
+    use HasJsonBody;
 
-	protected Method $method = Method::POST;
+    protected Method $method = Method::POST;
 
+    public function resolveEndpoint(): string
+    {
+        return '/api/webauthn/signup/finish';
+    }
 
-	public function resolveEndpoint(): string
-	{
-		return "/api/webauthn/signup/finish";
-	}
-
-
-	public function __construct()
-	{
-	}
+    public function __construct() {}
 }

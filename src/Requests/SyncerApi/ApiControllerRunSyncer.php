@@ -2,27 +2,22 @@
 
 namespace Gathern\CasdoorAPI\Requests\SyncerApi;
 
-use DateTime;
+use Gathern\CasdoorAPI\Requests\MainRequest;
 use Saloon\Enums\Method;
-use Saloon\Http\Request;
 
 /**
  * ApiController.RunSyncer
  *
  * run syncer
  */
-class ApiControllerRunSyncer extends Request
+class ApiControllerRunSyncer extends MainRequest
 {
-	protected Method $method = Method::GET;
+    protected Method $method = Method::GET;
 
+    public function resolveEndpoint(): string
+    {
+        return '/api/run-syncer';
+    }
 
-	public function resolveEndpoint(): string
-	{
-		return "/api/run-syncer";
-	}
-
-
-	public function __construct()
-	{
-	}
+    public function __construct() {}
 }

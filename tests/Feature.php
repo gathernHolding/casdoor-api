@@ -2,10 +2,10 @@
 
 use Gathern\CasdoorAPI\Example;
 
-it("foo", function (): void {
-    $example = new Example();
+it('foo', function (): void {
+    $example = new Example;
 
     $result = $example->foo();
 
-    expect($result)->toBe("bar");
+    expect($result)->toBe('bar');
 });

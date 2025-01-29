@@ -2,10 +2,9 @@
 
 namespace Gathern\CasdoorAPI\Requests\UserApi;
 
-use DateTime;
+use Gathern\CasdoorAPI\Requests\MainRequest;
 use Saloon\Contracts\Body\HasBody;
 use Saloon\Enums\Method;
-use Saloon\Http\Request;
 use Saloon\Traits\Body\HasJsonBody;
 
 /**
@@ -13,20 +12,16 @@ use Saloon\Traits\Body\HasJsonBody;
  *
  * delete user
  */
-class ApiControllerDeleteUser extends Request implements HasBody
+class ApiControllerDeleteUser extends MainRequest implements HasBody
 {
-	use HasJsonBody;
+    use HasJsonBody;
 
-	protected Method $method = Method::POST;
+    protected Method $method = Method::POST;
 
+    public function resolveEndpoint(): string
+    {
+        return '/api/delete-user';
+    }
 
-	public function resolveEndpoint(): string
-	{
-		return "/api/delete-user";
-	}
-
-
-	public function __construct()
-	{
-	}
+    public function __construct() {}
 }

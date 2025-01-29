@@ -2,27 +2,22 @@
 
 namespace Gathern\CasdoorAPI\Requests\UserApi;
 
-use DateTime;
+use Gathern\CasdoorAPI\Requests\MainRequest;
 use Saloon\Enums\Method;
-use Saloon\Http\Request;
 
 /**
  * ApiController.GetGlobalUsers
  *
  * get global users
  */
-class ApiControllerGetGlobalUsers extends Request
+class ApiControllerGetGlobalUsers extends MainRequest
 {
-	protected Method $method = Method::GET;
+    protected Method $method = Method::GET;
 
+    public function resolveEndpoint(): string
+    {
+        return '/api/get-global-users';
+    }
 
-	public function resolveEndpoint(): string
-	{
-		return "/api/get-global-users";
-	}
-
-
-	public function __construct()
-	{
-	}
+    public function __construct() {}
 }

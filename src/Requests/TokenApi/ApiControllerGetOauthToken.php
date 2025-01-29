@@ -2,10 +2,9 @@
 
 namespace Gathern\CasdoorAPI\Requests\TokenApi;
 
-use DateTime;
+use Gathern\CasdoorAPI\Requests\MainRequest;
 use Saloon\Contracts\Body\HasBody;
 use Saloon\Enums\Method;
-use Saloon\Http\Request;
 use Saloon\Traits\Body\HasJsonBody;
 
 /**
@@ -13,41 +12,37 @@ use Saloon\Traits\Body\HasJsonBody;
  *
  * get OAuth access token
  */
-class ApiControllerGetOauthToken extends Request implements HasBody
+class ApiControllerGetOauthToken extends MainRequest implements HasBody
 {
-	use HasJsonBody;
+    use HasJsonBody;
 
-	protected Method $method = Method::POST;
+    protected Method $method = Method::POST;
 
+    public function resolveEndpoint(): string
+    {
+        return '/api/login/oauth/access_token';
+    }
 
-	public function resolveEndpoint(): string
-	{
-		return "/api/login/oauth/access_token";
-	}
+    /**
+     * @param  mixed  $grantType  OAuth grant type
+     * @param  mixed  $clientId  OAuth client id
+     * @param  mixed  $clientSecret  OAuth client secret
+     * @param  mixed  $code  OAuth code
+     */
+    public function __construct(
+        protected mixed $grantType,
+        protected mixed $clientId,
+        protected mixed $clientSecret,
+        protected mixed $code,
+    ) {}
 
-
-	/**
-	 * @param mixed $grantType OAuth grant type
-	 * @param mixed $clientId OAuth client id
-	 * @param mixed $clientSecret OAuth client secret
-	 * @param mixed $code OAuth code
-	 */
-	public function __construct(
-		protected mixed $grantType,
-		protected mixed $clientId,
-		protected mixed $clientSecret,
-		protected mixed $code,
-	) {
-	}
-
-
-	public function defaultQuery(): array
-	{
-		return array_filter([
-			'grant_type' => $this->grantType,
-			'client_id' => $this->clientId,
-			'client_secret' => $this->clientSecret,
-			'code' => $this->code,
-		]);
-	}
+    public function defaultQuery(): array
+    {
+        return array_filter([
+            'grant_type' => $this->grantType,
+            'client_id' => $this->clientId,
+            'client_secret' => $this->clientSecret,
+            'code' => $this->code,
+        ]);
+    }
 }

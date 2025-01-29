@@ -2,10 +2,9 @@
 
 namespace Gathern\CasdoorAPI\Requests\TokenApi;
 
-use DateTime;
+use Gathern\CasdoorAPI\Requests\MainRequest;
 use Saloon\Contracts\Body\HasBody;
 use Saloon\Enums\Method;
-use Saloon\Http\Request;
 use Saloon\Traits\Body\HasJsonBody;
 
 /**
@@ -13,20 +12,16 @@ use Saloon\Traits\Body\HasJsonBody;
  *
  * add token
  */
-class ApiControllerAddToken extends Request implements HasBody
+class ApiControllerAddToken extends MainRequest implements HasBody
 {
-	use HasJsonBody;
+    use HasJsonBody;
 
-	protected Method $method = Method::POST;
+    protected Method $method = Method::POST;
 
+    public function resolveEndpoint(): string
+    {
+        return '/api/add-token';
+    }
 
-	public function resolveEndpoint(): string
-	{
-		return "/api/add-token";
-	}
-
-
-	public function __construct()
-	{
-	}
+    public function __construct() {}
 }

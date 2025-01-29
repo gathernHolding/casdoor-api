@@ -11,15 +11,14 @@ use Saloon\Http\Response;
 class VerificationApi extends Resource
 {
     public function apiControllerSendVerificationCode(
-        string  $dest,
-        string  $applicationId,
-        string  $type = "phone",
-        string  $captchaType = "none",
+        string $dest,
+        string $applicationId,
+        string $type = 'phone',
+        string $captchaType = 'none',
         ?string $optMethod = null,
         ?string $countryCode = null,
-        ?bool   $checkUser = null
-    ): Response
-    {
+        ?bool $checkUser = null
+    ): Response {
         return $this->connector->send(new ApiControllerSendVerificationCode(
             dest: $dest,
             applicationId: $applicationId,
@@ -31,15 +30,13 @@ class VerificationApi extends Resource
         ));
     }
 
-
     public function apiControllerVerifyCaptcha(): Response
     {
-        return $this->connector->send(new ApiControllerVerifyCaptcha());
+        return $this->connector->send(new ApiControllerVerifyCaptcha);
     }
-
 
     public function apiControllerVerifyCode(): Response
     {
-        return $this->connector->send(new ApiControllerVerifyCode());
+        return $this->connector->send(new ApiControllerVerifyCode);
     }
 }

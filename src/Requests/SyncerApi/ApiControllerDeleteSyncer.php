@@ -2,10 +2,9 @@
 
 namespace Gathern\CasdoorAPI\Requests\SyncerApi;
 
-use DateTime;
+use Gathern\CasdoorAPI\Requests\MainRequest;
 use Saloon\Contracts\Body\HasBody;
 use Saloon\Enums\Method;
-use Saloon\Http\Request;
 use Saloon\Traits\Body\HasJsonBody;
 
 /**
@@ -13,20 +12,16 @@ use Saloon\Traits\Body\HasJsonBody;
  *
  * delete syncer
  */
-class ApiControllerDeleteSyncer extends Request implements HasBody
+class ApiControllerDeleteSyncer extends MainRequest implements HasBody
 {
-	use HasJsonBody;
+    use HasJsonBody;
 
-	protected Method $method = Method::POST;
+    protected Method $method = Method::POST;
 
+    public function resolveEndpoint(): string
+    {
+        return '/api/delete-syncer';
+    }
 
-	public function resolveEndpoint(): string
-	{
-		return "/api/delete-syncer";
-	}
-
-
-	public function __construct()
-	{
-	}
+    public function __construct() {}
 }

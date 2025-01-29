@@ -2,10 +2,9 @@
 
 namespace Gathern\CasdoorAPI\Requests\LoginApi;
 
-use DateTime;
+use Gathern\CasdoorAPI\Requests\MainRequest;
 use Saloon\Contracts\Body\HasBody;
 use Saloon\Enums\Method;
-use Saloon\Http\Request;
 use Saloon\Traits\Body\HasJsonBody;
 
 /**
@@ -13,20 +12,16 @@ use Saloon\Traits\Body\HasJsonBody;
  *
  * The introspection endpoint is an OAuth 2.0 endpoint that takes a
  */
-class ApiControllerIntrospectToken extends Request implements HasBody
+class ApiControllerIntrospectToken extends MainRequest implements HasBody
 {
-	use HasJsonBody;
+    use HasJsonBody;
 
-	protected Method $method = Method::POST;
+    protected Method $method = Method::POST;
 
+    public function resolveEndpoint(): string
+    {
+        return '/api/login/oauth/introspect';
+    }
 
-	public function resolveEndpoint(): string
-	{
-		return "/api/login/oauth/introspect";
-	}
-
-
-	public function __construct()
-	{
-	}
+    public function __construct() {}
 }

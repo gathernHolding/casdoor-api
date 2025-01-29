@@ -2,27 +2,22 @@
 
 namespace Gathern\CasdoorAPI\Requests\UserApi;
 
-use DateTime;
+use Gathern\CasdoorAPI\Requests\MainRequest;
 use Saloon\Enums\Method;
-use Saloon\Http\Request;
 
 /**
  * ApiController.GetEmailAndPhone
  *
  * get email and phone by username
  */
-class ApiControllerGetEmailAndPhone extends Request
+class ApiControllerGetEmailAndPhone extends MainRequest
 {
-	protected Method $method = Method::GET;
+    protected Method $method = Method::GET;
 
+    public function resolveEndpoint(): string
+    {
+        return '/api/get-email-and-phone';
+    }
 
-	public function resolveEndpoint(): string
-	{
-		return "/api/get-email-and-phone";
-	}
-
-
-	public function __construct()
-	{
-	}
+    public function __construct() {}
 }

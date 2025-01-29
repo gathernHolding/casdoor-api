@@ -11,6 +11,7 @@
     "authors": [],
     "require": {
         "php": "^8.1.0",
+        "eventsauce/object-hydrator": "^1.6",
         "saloonphp/saloon": "^3.0"
     },
     "require-dev": {
@@ -47,6 +48,10 @@
         "test:lint": "pint --test",
         "test:types": "phpstan analyse --ansi",
         "test:unit": "pest --colors=always --coverage --parallel --min=100",
+        "fix": [
+            "@refacto",
+            "@lint"
+        ],
         "test": [
             "@test:refacto",
             "@test:lint",

@@ -2,29 +2,24 @@
 
 namespace Gathern\CasdoorAPI\Requests\VerificationApi;
 
-use DateTime;
+use Gathern\CasdoorAPI\Requests\MainRequest;
 use Saloon\Contracts\Body\HasBody;
 use Saloon\Enums\Method;
-use Saloon\Http\Request;
 use Saloon\Traits\Body\HasJsonBody;
 
 /**
  * ApiController.VerifyCode
  */
-class ApiControllerVerifyCode extends Request implements HasBody
+class ApiControllerVerifyCode extends MainRequest implements HasBody
 {
-	use HasJsonBody;
+    use HasJsonBody;
 
-	protected Method $method = Method::POST;
+    protected Method $method = Method::POST;
 
+    public function resolveEndpoint(): string
+    {
+        return '/api/verify-code';
+    }
 
-	public function resolveEndpoint(): string
-	{
-		return "/api/verify-code";
-	}
-
-
-	public function __construct()
-	{
-	}
+    public function __construct() {}
 }
