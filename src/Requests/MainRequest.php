@@ -8,7 +8,6 @@ use Gathern\CasdoorAPI\Enum\ResponseStatus;
 use Saloon\Http\Request;
 use Saloon\Http\Response;
 
-
 abstract class MainRequest extends Request
 {
     /**
@@ -18,12 +17,10 @@ abstract class MainRequest extends Request
      */
     protected string $dataClassName;
 
-
     public function getDataClassName(): string
     {
         return $this->dataClassName;
     }
-
 
     public function createDtoFromResponse(Response $response): ResponseData
     {
@@ -36,7 +33,7 @@ abstract class MainRequest extends Request
         if (is_array($responseData)) {
 
             $mapper = new ObjectMapperUsingReflection;
-//@phpstan-ignore-next-line
+            // @phpstan-ignore-next-line
             $responseData = $mapper->hydrateObject(className: $this->getDataClassName(), payload: $responseData);
         }
 

@@ -17,7 +17,7 @@ final class ResponseData
          * @var T-Data
          */
         public readonly mixed $data, // @phpstan-ignore-line
-       /**
+        /**
          * @var T-Data
          */
         public readonly mixed $data2 // @phpstan-ignore-line

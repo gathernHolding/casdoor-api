@@ -35,7 +35,7 @@ class ApiControllerSendVerificationCode extends MainRequest implements HasBody
     /**
      * Default body
      *
-     * @return  MultipartValue[]
+     * @return MultipartValue[]
      */
     protected function defaultBody(): array
     {
@@ -50,8 +50,8 @@ class ApiControllerSendVerificationCode extends MainRequest implements HasBody
         ];
 
         return array_map(
-            callback:fn ($key): MultipartValue => new MultipartValue(name: $key, value:(string) $data[$key]),
-             array:array_keys(array_filter($data))
-            );
+            callback: fn ($key): MultipartValue => new MultipartValue(name: $key, value: (string) $data[$key]),
+            array: array_keys(array_filter($data))
+        );
     }
 }
