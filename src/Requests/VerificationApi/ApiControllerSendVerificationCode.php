@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Gathern\CasdoorAPI\Requests\VerificationApi;
 
 use Gathern\CasdoorAPI\Requests\MainRequest;

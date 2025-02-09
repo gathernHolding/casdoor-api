@@ -3,11 +3,13 @@
 namespace Gathern\CasdoorAPI;
 
 use Gathern\CasdoorAPI\Resource\LoginApi;
+use Gathern\CasdoorAPI\Resource\RoleApi;
 use Gathern\CasdoorAPI\Resource\SyncerApi;
 use Gathern\CasdoorAPI\Resource\TokenApi;
 use Gathern\CasdoorAPI\Resource\UserApi;
 use Gathern\CasdoorAPI\Resource\VerificationApi;
 use Gathern\CasdoorAPI\Resource\WebhookApi;
+use Saloon\Http\Auth\BasicAuthenticator;
 use Saloon\Http\Connector;
 
 /**
@@ -17,14 +19,31 @@ use Saloon\Http\Connector;
  */
 class CasdoorConnector extends Connector
 {
+    public readonly string $client_id;
+
+    public readonly string $client_secret;
+
     public function resolveBaseUrl(): string
     {
         return getenv('CASDOOR_BASE_URL') ?: 'http://127.0.0.1:8000';
     }
 
+    protected function defaultAuth(): BasicAuthenticator
+    {
+        return new BasicAuthenticator(
+            username: $this->client_id,
+            password: $this->client_secret,
+        );
+    }
+
     public function loginApi(): LoginApi
     {
         return new LoginApi($this);
+    }
+
+    public function roleApi(): RoleApi
+    {
+        return new RoleApi($this);
     }
 
     public function syncerApi(): SyncerApi
@@ -50,5 +69,11 @@ class CasdoorConnector extends Connector
     public function webhookApi(): WebhookApi
     {
         return new WebhookApi($this);
+    }
+
+    public function __construct(?string $client_id = null, ?string $client_secret = null)
+    {
+        $this->client_id = (string) ($client_id ?? getenv('AUTH_CLIENT_ID'));
+        $this->client_secret = (string) ($client_secret ?? getenv('AUTH_CLIENT_SECRET'));
     }
 }

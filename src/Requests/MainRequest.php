@@ -15,11 +15,18 @@ abstract class MainRequest extends Request
      *
      * @var class-string
      */
-    protected string $dataClassName;
+    protected ?string $dataClassName = null;
 
-    public function getDataClassName(): string
+    protected bool $isCollectionData = false;
+
+    public function getDataClassName(): ?string
     {
         return $this->dataClassName;
+    }
+
+    public function getIsCollectionData(): ?bool
+    {
+        return $this->isCollectionData;
     }
 
     public function createDtoFromResponse(Response $response): ResponseData
@@ -29,13 +36,7 @@ abstract class MainRequest extends Request
          * @var array{status: string, msg: null|string, sub: null|string, name: null|string, data: mixed, data2: mixed} $data
          */
         $data = $response->json();
-        $responseData = $data['data'];
-        if (is_array($responseData)) {
-
-            $mapper = new ObjectMapperUsingReflection;
-            // @phpstan-ignore-next-line
-            $responseData = $mapper->hydrateObject(className: $this->getDataClassName(), payload: $responseData);
-        }
+        $responseData = $this->mapDataToDTO($data['data']);
 
         return new ResponseData(
             status: ResponseStatus::from($data['status']),
@@ -45,5 +46,34 @@ abstract class MainRequest extends Request
             data: $responseData,
             data2: $data['data2']
         );
+    }
+
+    private function mapDataToDTO(mixed $data): mixed
+    {
+
+        if (! is_array($data) || $data === [] || $this->getDataClassName() === null) {
+            return $data;
+        }
+
+        $mapper = new ObjectMapperUsingReflection;
+        if ($this->getIsCollectionData() !== true) {
+            return $mapper->hydrateObject(className: $this->getDataClassName(), payload: $data); // @phpstan-ignore-line
+        }
+
+        return array_reduce(
+            array: $data,
+            callback: function (array $carry, array $item) use ($mapper): array {
+                $carry[] = $mapper->hydrateObject(className: $this->getDataClassName(), payload: $item); // @phpstan-ignore-line
+
+                return $carry;
+            },
+            initial: [],
+
+        );
+    }
+
+    public function createCasdoorId(string $name): string
+    {
+        return (string) strpos($name, '/') !== '' && (string) strpos($name, '/') !== '0' ? $name : getenv('AUTH_ORGANIZATION_NAME').'/'.$name;
     }
 }

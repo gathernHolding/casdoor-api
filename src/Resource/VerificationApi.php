@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Gathern\CasdoorAPI\Resource;
 
 use Gathern\CasdoorAPI\Requests\VerificationApi\ApiControllerSendVerificationCode;

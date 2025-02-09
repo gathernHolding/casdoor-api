@@ -1,0 +1,11 @@
+{
+    "statusCode": 200,
+    "headers": {
+        "Content-Length": "119",
+        "Content-Type": "application\/json; charset=utf-8",
+        "Server": "beegoServer:1.12.3",
+        "Set-Cookie": "casdoor_session_id=d9714f87ef5dc890d3c3396ce9a49710; Path=\/; Expires=Mon, 10 Mar 2025 15:23:21 GMT; Max-Age=2592000; HttpOnly",
+        "Date": "Sat, 08 Feb 2025 15:23:21 GMT"
+    },
+    "data": "{\n  \"status\": \"error\",\n  \"msg\": \"Username already exists\",\n  \"sub\": \"\",\n  \"name\": \"\",\n  \"data\": null,\n  \"data2\": null\n}"
+}

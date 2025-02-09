@@ -1,7 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Gathern\CasdoorAPI\Resource;
 
+use DateTime;
 use Gathern\CasdoorAPI\Requests\UserApi\ApiControllerAddUser;
 use Gathern\CasdoorAPI\Requests\UserApi\ApiControllerAddUserKeys;
 use Gathern\CasdoorAPI\Requests\UserApi\ApiControllerCheckUserPassword;
@@ -20,9 +23,56 @@ use Saloon\Http\Response;
 
 class UserApi extends Resource
 {
-    public function apiControllerAddUser(): Response
-    {
-        return $this->connector->send(new ApiControllerAddUser);
+    /**
+     * Summary of apiControllerAddUser
+     *
+     * @param  string[]  $address
+     * @param  string[]  $roles
+     * @param  array<string,string>  $properties
+     * @param  string[]  $managedAccounts
+     */
+    public function apiControllerAddUser(
+        string $name,
+        ?string $email = null,
+        ?string $phone = null,
+        ?string $firstName = null,
+        ?string $lastName = null,
+        ?string $displayName = null,
+        ?string $countryCode = '+966',
+        ?string $language = null,
+        ?array $address = [],
+        ?string $birthday = null,
+        ?string $gender = null,
+        ?string $bio = null,
+        ?array $roles = [],
+        ?array $properties = [],
+        ?DateTime $createdTime = new DateTime('now'),
+        ?string $owner = null,
+        ?array $managedAccounts = null,
+        ?int $ranking = null,
+        ?string $region = null,
+    ): Response {
+        return $this->connector->send(new ApiControllerAddUser(
+            name: $name,
+            address: $address,
+            bio: $bio,
+            birthday: $birthday,
+            countryCode: $countryCode,
+            createdTime: $createdTime,
+            displayName: $displayName,
+            email: $email,
+            firstName: $firstName,
+            gender: $gender,
+            language: $language,
+            lastName: $lastName,
+            managedAccounts: $managedAccounts,
+            owner: $owner,
+            phone: $phone,
+            properties: $properties,
+            ranking: $ranking,
+            region: $region,
+            roles: $roles
+        ));
     }
 
     public function apiControllerAddUserKeys(): Response
@@ -61,38 +111,31 @@ class UserApi extends Resource
     }
 
     /**
-     * @param  mixed  $id  The id ( owner/name ) of the user
-     * @param  mixed  $owner  The owner of the user
-     * @param  mixed  $email  The email of the user
-     * @param  mixed  $phone  The phone of the user
-     * @param  mixed  $userId  The userId of the user
+     * @param  string  $id  The id ( owner/name ) of the user
+     * @param  string  $owner  The owner of the user
+     * @param  string  $email  The email of the user
+     * @param  string  $phone  The phone of the user
+     * @param  string  $userId  The userId of the user
      */
-    public function apiControllerGetUser(mixed $id, mixed $owner, mixed $email, mixed $phone, mixed $userId): Response
+    public function apiControllerGetUser(string $id, string $owner, string $email, string $phone, string $userId): Response
     {
         return $this->connector->send(new ApiControllerGetUser($id, $owner, $email, $phone, $userId));
     }
 
-    /**
-     * @param  mixed  $owner  The owner of users
-     * @param  mixed  $isOnline  The filter for query, 1 for online, 0 for offline, empty string for all users
-     */
-    public function apiControllerGetUserCount(mixed $owner, mixed $isOnline): Response
+    public function apiControllerGetUserCount(string $owner, bool $isOnline): Response
     {
         return $this->connector->send(new ApiControllerGetUserCount($owner, $isOnline));
     }
 
-    /**
-     * @param  mixed  $owner  The owner of users
-     */
-    public function apiControllerGetUsers(mixed $owner): Response
+    public function apiControllerGetUsers(string $owner): Response
     {
         return $this->connector->send(new ApiControllerGetUsers($owner));
     }
 
     /**
-     * @param  mixed  $id  The id ( owner/name ) of the user
+     * @param  string  $id  The id ( owner/name ) of the user
      */
-    public function apiControllerUpdateUser(mixed $id): Response
+    public function apiControllerUpdateUser(string $id): Response
     {
         return $this->connector->send(new ApiControllerUpdateUser($id));
     }
