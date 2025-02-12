@@ -2,15 +2,15 @@
 
 namespace Gathern\CasdoorAPI\Requests\PermissionApi;
 
+use Gathern\CasdoorAPI\Requests\MainRequest;
 use Saloon\Enums\Method;
-use Saloon\Http\Request;
 
 /**
  * ApiController.GetPermission
  *
  * get permission
  */
-class ApiControllerGetPermission extends Request
+class ApiControllerGetPermission extends MainRequest
 {
     protected Method $method = Method::GET;
 
@@ -20,10 +20,10 @@ class ApiControllerGetPermission extends Request
     }
 
     /**
-     * @param  mixed  $id  The id ( owner/name ) of the permission
+     * @param  string  $id  The id ( owner/name ) of the permission
      */
     public function __construct(
-        protected mixed $id,
+        protected string $id,
     ) {}
 
     public function defaultQuery(): array

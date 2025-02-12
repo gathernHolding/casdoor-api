@@ -3,6 +3,7 @@
 namespace Gathern\CasdoorAPI;
 
 use Gathern\CasdoorAPI\Resource\LoginApi;
+use Gathern\CasdoorAPI\Resource\PermissionApi;
 use Gathern\CasdoorAPI\Resource\RoleApi;
 use Gathern\CasdoorAPI\Resource\SyncerApi;
 use Gathern\CasdoorAPI\Resource\TokenApi;
@@ -44,6 +45,11 @@ class CasdoorConnector extends Connector
     public function roleApi(): RoleApi
     {
         return new RoleApi($this);
+    }
+
+    public function permissionApi(): PermissionApi
+    {
+        return new PermissionApi($this);
     }
 
     public function syncerApi(): SyncerApi

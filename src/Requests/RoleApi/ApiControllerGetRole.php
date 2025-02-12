@@ -10,6 +10,8 @@ use Saloon\Enums\Method;
  * ApiController.GetRole
  *
  * get role
+ *
+ * @extends MainRequest<RoleData>
  */
 class ApiControllerGetRole extends MainRequest
 {

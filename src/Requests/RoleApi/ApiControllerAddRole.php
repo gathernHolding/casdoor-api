@@ -36,12 +36,12 @@ class ApiControllerAddRole extends MainRequest implements HasBody
         return array_filter([
             'displayName' => $this->displayName,
             'name' => $this->name,
-            'owner' => $this->owner,
+            'owner' => $this->owner ?? getenv('AUTH_ORGANIZATION_NAME'),
             'createdTime' => $this->createdTime,
-            'users' => $this->users,
-            'groups' => $this->groups,
-            'roles' => $this->roles,
-            'domains' => $this->domains,
+            'users' => $this->createCasdoorForValues($this->users),
+            'groups' => $this->createCasdoorForValues($this->groups),
+            'roles' => $this->createCasdoorForValues($this->roles),
+            'domains' => $this->createCasdoorForValues($this->domains),
             'isEnabled' => $this->isEnabled,
         ]);
     }
@@ -49,7 +49,7 @@ class ApiControllerAddRole extends MainRequest implements HasBody
     public function __construct(
         protected readonly string $displayName,
         protected readonly string $name,
-        protected readonly string $owner = 'built-in',
+        protected readonly ?string $owner = null,
         // protected readonly DateTime $createdTime = new DateTime('now'),
         protected readonly ?DateTime $createdTime = null,
         /** @var string[] */

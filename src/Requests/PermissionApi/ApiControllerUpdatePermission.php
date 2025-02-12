@@ -2,9 +2,9 @@
 
 namespace Gathern\CasdoorAPI\Requests\PermissionApi;
 
+use Gathern\CasdoorAPI\Requests\MainRequest;
 use Saloon\Contracts\Body\HasBody;
 use Saloon\Enums\Method;
-use Saloon\Http\Request;
 use Saloon\Traits\Body\HasJsonBody;
 
 /**
@@ -12,7 +12,7 @@ use Saloon\Traits\Body\HasJsonBody;
  *
  * update permission
  */
-class ApiControllerUpdatePermission extends Request implements HasBody
+class ApiControllerUpdatePermission extends MainRequest implements HasBody
 {
     use HasJsonBody;
 
@@ -24,10 +24,10 @@ class ApiControllerUpdatePermission extends Request implements HasBody
     }
 
     /**
-     * @param  mixed  $id  The id ( owner/name ) of the permission
+     * @param  string  $id  The id ( owner/name ) of the permission
      */
     public function __construct(
-        protected mixed $id,
+        protected string $id,
     ) {}
 
     public function defaultQuery(): array

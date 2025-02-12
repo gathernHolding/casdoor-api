@@ -20,10 +20,10 @@ final class RoleData
         public readonly ?string $createdTime,
         public readonly ?string $displayName,
         public readonly ?string $description,
-        public readonly array $users,
-        public readonly array $groups,
-        public readonly array $roles,
-        public readonly array $domains,
+        public readonly ?array $users,
+        public readonly ?array $groups,
+        public readonly ?array $roles,
+        public readonly ?array $domains,
         #[MapFrom('isEnabled')]
         public readonly bool $isEnabled
     ) {}

@@ -2,9 +2,9 @@
 
 namespace Gathern\CasdoorAPI\Requests\PermissionApi;
 
+use Gathern\CasdoorAPI\Requests\MainRequest;
 use Saloon\Contracts\Body\HasBody;
 use Saloon\Enums\Method;
-use Saloon\Http\Request;
 use Saloon\Traits\Body\HasJsonBody;
 
 /**
@@ -12,7 +12,7 @@ use Saloon\Traits\Body\HasJsonBody;
  *
  * add permission
  */
-class ApiControllerAddPermission extends Request implements HasBody
+class ApiControllerAddPermission extends MainRequest implements HasBody
 {
     use HasJsonBody;
 

@@ -46,9 +46,9 @@ class RoleApi extends Resource
         ));
     }
 
-    public function apiControllerDeleteRole(): Response
+    public function apiControllerDeleteRole(string $displayName, string $name): Response
     {
-        return $this->connector->send(new ApiControllerDeleteRole);
+        return $this->connector->send(new ApiControllerDeleteRole(displayName: $displayName, name: $name));
     }
 
     /**
@@ -65,7 +65,7 @@ class RoleApi extends Resource
     public function apiControllerGetRoles(?string $owner = null): Response
     {
         return $this->connector->send(new ApiControllerGetRoles(
-            owner: (string) ($owner !== null && $owner !== '' && $owner !== '0' ? $owner : getenv('AUTH_ORGANIZATION_NAME')
+            owner: (string) ($owner ?? getenv('AUTH_ORGANIZATION_NAME')
             )
         ));
     }
@@ -92,7 +92,7 @@ class RoleApi extends Resource
             id: $id,
             displayName: $displayName,
             name: $name,
-            owner: (string) ($owner !== null && $owner !== '' && $owner !== '0' ? $owner : getenv('AUTH_ORGANIZATION_NAME')),
+            owner: (string) ($owner ?? getenv('AUTH_ORGANIZATION_NAME')),
             createdTime: $createdTime,
             users: $users,
             groups: $groups,
@@ -114,22 +114,22 @@ class RoleApi extends Resource
         ?string $name = null,
         ?string $owner = null,
         ?DateTime $createdTime = null,
-        array $users = [],
-        array $groups = [],
-        array $roles = [],
-        array $domains = [],
+        ?array $users = null,
+        ?array $groups = null,
+        ?array $roles = null,
+        ?array $domains = null,
         bool $isEnabled = true
     ): Response {
         return $this->connector->send(new ApiControllerUpdateRole(
             id: $roleData->name,
-            displayName: $displayName !== null && $displayName !== '' && $displayName !== '0' ? $displayName : $roleData->displayName,
-            name: $name !== null && $name !== '' && $name !== '0' ? $name : $roleData->name,
-            owner: $owner !== null && $owner !== '' && $owner !== '0' ? $owner : $roleData->owner,
+            displayName: $displayName ?? $roleData->displayName,
+            name: $name ?? $roleData->name,
+            owner: $owner ?? $roleData->owner,
             createdTime: $createdTime ?? new DateTime($roleData->createdTime ?? 'now'),
-            users: $users !== [] ? $users : $roleData->users,
-            groups: $groups !== [] ? $groups : $roleData->groups,
-            roles: $roles !== [] ? $roles : $roleData->roles,
-            domains: $domains !== [] ? $domains : $roleData->domains,
+            users: $users ?? $roleData->users ?? [],
+            groups: $groups ?? $roleData->groups ?? [],
+            roles: $roles ?? $roleData->roles ?? [],
+            domains: $domains ?? $roleData->domains ?? [],
             isEnabled: $isEnabled
         ));
     }

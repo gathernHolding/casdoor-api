@@ -27,25 +27,25 @@ class PermissionApi extends Resource
     }
 
     /**
-     * @param  mixed  $id  The id ( owner/name ) of the permission
+     * @param  string  $id  The id ( owner/name ) of the permission
      */
-    public function apiControllerGetPermission(mixed $id): Response
+    public function apiControllerGetPermission(string $id): Response
     {
         return $this->connector->send(new ApiControllerGetPermission($id));
     }
 
     /**
-     * @param  mixed  $owner  The owner of permissions
+     * @param  string  $owner  The owner of permissions
      */
-    public function apiControllerGetPermissions(mixed $owner): Response
+    public function apiControllerGetPermissions(string $owner): Response
     {
         return $this->connector->send(new ApiControllerGetPermissions($owner));
     }
 
     /**
-     * @param  mixed  $id  The id ( owner/name ) of the role
+     * @param  string  $id  The id ( owner/name ) of the role
      */
-    public function apiControllerGetPermissionsByRole(mixed $id): Response
+    public function apiControllerGetPermissionsByRole(string $id): Response
     {
         return $this->connector->send(new ApiControllerGetPermissionsByRole($id));
     }
@@ -56,9 +56,9 @@ class PermissionApi extends Resource
     }
 
     /**
-     * @param  mixed  $id  The id ( owner/name ) of the permission
+     * @param  string  $id  The id ( owner/name ) of the permission
      */
-    public function apiControllerUpdatePermission(mixed $id): Response
+    public function apiControllerUpdatePermission(string $id): Response
     {
         return $this->connector->send(new ApiControllerUpdatePermission($id));
     }

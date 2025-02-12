@@ -8,6 +8,9 @@ use Gathern\CasdoorAPI\Enum\ResponseStatus;
 use Saloon\Http\Request;
 use Saloon\Http\Response;
 
+/**
+ * @template TData = string
+ */
 abstract class MainRequest extends Request
 {
     /**
@@ -29,6 +32,12 @@ abstract class MainRequest extends Request
         return $this->isCollectionData;
     }
 
+    /**
+     * creates the dto using dto() method
+
+     *
+     * @return ResponseData<TData, mixed>
+     */
     public function createDtoFromResponse(Response $response): ResponseData
     {
 
@@ -38,6 +47,7 @@ abstract class MainRequest extends Request
         $data = $response->json();
         $responseData = $this->mapDataToDTO($data['data']);
 
+        // @phpstan-ignore-next-line
         return new ResponseData(
             status: ResponseStatus::from($data['status']),
             msg: $data['msg'],
@@ -74,6 +84,19 @@ abstract class MainRequest extends Request
 
     public function createCasdoorId(string $name): string
     {
-        return (string) strpos($name, '/') !== '' && (string) strpos($name, '/') !== '0' ? $name : getenv('AUTH_ORGANIZATION_NAME').'/'.$name;
+        return strpos($name, '/') ? $name : getenv('AUTH_ORGANIZATION_NAME').'/'.$name;
+    }
+
+    /**
+     * @param  string[]  $names
+     * @return string[]
+     */
+    public function createCasdoorForValues(array $names): array
+    {
+        return array_map(
+            callback: fn (string $name): string => $this->createCasdoorId($name),
+            array: $names,
+        );
+
     }
 }

@@ -6,6 +6,10 @@ namespace Gathern\CasdoorAPI\DTO;
 
 use Gathern\CasdoorAPI\Enum\ResponseStatus;
 
+/**
+ * @template TData
+ * @template TData2
+ */
 final class ResponseData
 {
     public function __construct(
@@ -14,12 +18,12 @@ final class ResponseData
         public readonly ?string $sub,
         public readonly ?string $name,
         /**
-         * @var T-Data
+         * @var TData
          */
-        public readonly mixed $data, // @phpstan-ignore-line
+        public readonly mixed $data,
         /**
-         * @var T-Data
+         * @var TData2
          */
-        public readonly mixed $data2 // @phpstan-ignore-line
+        public readonly mixed $data2
     ) {}
 }

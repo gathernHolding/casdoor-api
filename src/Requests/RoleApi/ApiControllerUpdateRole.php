@@ -38,10 +38,10 @@ class ApiControllerUpdateRole extends MainRequest implements HasBody
             'name' => $this->name,
             'owner' => $this->owner,
             'createdTime' => $this->createdTime,
-            'users' => $this->users,
-            'groups' => $this->groups,
-            'roles' => $this->roles,
-            'domains' => $this->domains,
+            'users' => $this->createCasdoorForValues($this->users ?? []),
+            'groups' => $this->createCasdoorForValues($this->groups ?? []),
+            'roles' => $this->createCasdoorForValues($this->roles ?? []),
+            'domains' => $this->createCasdoorForValues($this->domains ?? []),
             'isEnabled' => $this->isEnabled,
         ]);
     }
@@ -66,14 +66,14 @@ class ApiControllerUpdateRole extends MainRequest implements HasBody
         public readonly string $owner,
         // public readonly DateTime $createdTime = new DateTime('now'),
         public readonly ?DateTime $createdTime = null,
-        /** @var string[] */
-        public readonly array $users = [],
-        /** @var string[] */
-        public readonly array $groups = [],
-        /** @var string[] */
-        public readonly array $roles = [],
-        /** @var string[] */
-        public readonly array $domains = [],
+        /** @var null|string[] */
+        public readonly ?array $users = [],
+        /** @var null|string[] */
+        public readonly ?array $groups = [],
+        /** @var null|string[] */
+        public readonly ?array $roles = [],
+        /** @var null|string[] */
+        public readonly ?array $domains = [],
         public readonly bool $isEnabled = true
 
     ) {}

@@ -2,15 +2,15 @@
 
 namespace Gathern\CasdoorAPI\Requests\PermissionApi;
 
+use Gathern\CasdoorAPI\Requests\MainRequest;
 use Saloon\Enums\Method;
-use Saloon\Http\Request;
 
 /**
  * ApiController.GetPermissionsBySubmitter
  *
  * get permissions by submitter
  */
-class ApiControllerGetPermissionsBySubmitter extends Request
+class ApiControllerGetPermissionsBySubmitter extends MainRequest
 {
     protected Method $method = Method::GET;
 
