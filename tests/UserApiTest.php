@@ -3,6 +3,7 @@
 use Gathern\CasdoorAPI\CasdoorConnector;
 use Gathern\CasdoorAPI\Enum\ResponseStatus;
 use Gathern\CasdoorAPI\Requests\UserApi\ApiControllerAddUser;
+use Gathern\CasdoorAPI\Requests\UserApi\ApiControllerSetUserPassword;
 use Saloon\Http\Faking\MockClient;
 use Saloon\Http\Faking\MockResponse;
 
@@ -34,4 +35,17 @@ describe('UserApiTest', function (): void {
 
     });
 
+    it('update user password successfully', function (): void {
+
+        $this->connector->withMockClient(new MockClient([
+            ApiControllerSetUserPassword::class => MockResponse::fixture('Users/set-password/ok'),
+        ]));
+        $response = $this->connector->userApi()->apiControllerSetUserPassword(
+            userName: '1',
+            newPassword: '123456',
+        );
+        $responseBody = $response->dto();
+        expect(value: $responseBody->status)->toBe(ResponseStatus::OK);
+
+    });
 });

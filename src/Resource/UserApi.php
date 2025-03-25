@@ -15,6 +15,7 @@ use Gathern\CasdoorAPI\Requests\UserApi\ApiControllerGetSortedUsers;
 use Gathern\CasdoorAPI\Requests\UserApi\ApiControllerGetUser;
 use Gathern\CasdoorAPI\Requests\UserApi\ApiControllerGetUserCount;
 use Gathern\CasdoorAPI\Requests\UserApi\ApiControllerGetUsers;
+use Gathern\CasdoorAPI\Requests\UserApi\ApiControllerSetUserPassword;
 use Gathern\CasdoorAPI\Requests\UserApi\ApiControllerUpdateUser;
 use Gathern\CasdoorAPI\Requests\UserApi\ApiControllerWebAuthnSignupBegin;
 use Gathern\CasdoorAPI\Requests\UserApi\ApiControllerWebAuthnSignupFinish;
@@ -148,5 +149,15 @@ class UserApi extends Resource
     public function apiControllerWebAuthnSignupFinish(): Response
     {
         return $this->connector->send(new ApiControllerWebAuthnSignupFinish);
+    }
+
+    public function apiControllerSetUserPassword(string $userName, string $newPassword, ?string $userOwner = null, ?string $oldPassword = null): Response
+    {
+        return $this->connector->send(new ApiControllerSetUserPassword(
+            userName: $userName,
+            newPassword: $newPassword,
+            userOwner: (string) ($userOwner ?? getenv('AUTH_ORGANIZATION_NAME')),
+            oldPassword: $oldPassword,
+        ));
     }
 }
