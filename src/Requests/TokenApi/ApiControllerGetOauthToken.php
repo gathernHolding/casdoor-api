@@ -31,11 +31,11 @@ class ApiControllerGetOauthToken extends Request implements HasBody
         protected string $clientSecret,
         protected GrantType $grantType = GrantType::AUTHORIZATION_CODE,
         protected ?string $code = null,
-    ) {
-    }
+    ) {}
 
     /**
      * Summary of defaultBody
+     *
      * @return array<string, mixed>
      */
     public function defaultBody(): array

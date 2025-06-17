@@ -14,6 +14,5 @@ class OauthTokenResponseData
         public readonly ?int $expiresIn,
         /** @var string[] */
         public readonly ?array $scope = []
-    ) {
-    }
+    ) {}
 }

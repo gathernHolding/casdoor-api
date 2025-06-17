@@ -29,8 +29,7 @@ class ApiControllerGetGroups extends MainRequest
      */
     public function __construct(
         protected ?string $owner,
-    ) {
-    }
+    ) {}
 
     public function defaultQuery(): array
     {

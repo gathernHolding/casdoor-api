@@ -14,7 +14,7 @@ use Saloon\Http\Response;
 class GroupApi extends Resource
 {
     /**
-     * @param string[] $users
+     * @param  string[]  $users
      */
     public function apiControllerAddGroup(
         string $name,
@@ -72,7 +72,7 @@ class GroupApi extends Resource
 
     /**
      * @param  string  $id  The id ( owner/name ) of the group
-     * @param string[] $users
+     * @param  string[]  $users
      */
     public function apiControllerUpdateGroup(
         string $id,

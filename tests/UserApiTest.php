@@ -53,7 +53,7 @@ describe('UserApiTest', function (): void {
 
     });
 
-    it('login the user using username and password to get the jwt token succesfully', function () {
+    it('login the user using username and password to get the jwt token succesfully', function (): void {
         $this->connector->withMockClient(new MockClient([
             ApiControllerLogin::class => MockResponse::fixture('Users/login/by-password/ok'),
         ]));
@@ -69,7 +69,7 @@ describe('UserApiTest', function (): void {
             ->and($response->dto()->data)->toBeString();
     });
 
-    it('login the user using client creds to get the jwt token succesfully', function () {
+    it('login the user using client creds to get the jwt token succesfully', function (): void {
         $this->connector->withMockClient(new MockClient([
             ApiControllerGetOauthToken::class => MockResponse::fixture('Users/login/oauth/ok'),
         ]));
