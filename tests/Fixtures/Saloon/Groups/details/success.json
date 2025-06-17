@@ -1,0 +1,11 @@
+{
+    "statusCode": 200,
+    "headers": {
+        "Content-Length": "474",
+        "Content-Type": "application\/json; charset=utf-8",
+        "Server": "beegoServer:1.12.3",
+        "Set-Cookie": "casdoor_session_id=3bca1b95c84154892c9e0f754d5f9ca9; Path=\/; Expires=Thu, 17 Jul 2025 13:33:29 GMT; Max-Age=2592000; HttpOnly",
+        "Date": "Tue, 17 Jun 2025 13:33:29 GMT"
+    },
+    "data": "{\n  \"status\": \"ok\",\n  \"msg\": \"\",\n  \"sub\": \"\",\n  \"name\": \"\",\n  \"data\": {\n    \"owner\": \"built-in\",\n    \"name\": \"parent\",\n    \"createdTime\": \"2025-06-17T11:55:49+03:00\",\n    \"updatedTime\": \"2025-06-17T11:55:49+03:00\",\n    \"displayName\": \"parent\",\n    \"manager\": \"\",\n    \"contactEmail\": \"\",\n    \"type\": \"Virtual\",\n    \"parentId\": \"built-in\",\n    \"parentName\": \"\",\n    \"isTopGroup\": true,\n    \"users\": null,\n    \"haveChildren\": false,\n    \"isEnabled\": true\n  },\n  \"data2\": null\n}"
+}

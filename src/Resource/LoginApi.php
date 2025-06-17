@@ -58,7 +58,7 @@ class LoginApi extends Resource implements HasBody
     public function apiControllerLogin(
         string $application,
         string $username,
-        SignInMethod $signinMethod = SignInMethod::VerificationCode,
+        SignInMethod $signinMethod = SignInMethod::VERIFICATION_CODE,
         LoginType $type = LoginType::TOKEN,
         ?string $password = null,
         ?string $code = null,

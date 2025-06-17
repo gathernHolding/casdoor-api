@@ -2,6 +2,7 @@
 
 namespace Gathern\CasdoorAPI;
 
+use Gathern\CasdoorAPI\Resource\GroupApi;
 use Gathern\CasdoorAPI\Resource\LoginApi;
 use Gathern\CasdoorAPI\Resource\PermissionApi;
 use Gathern\CasdoorAPI\Resource\RoleApi;
@@ -75,6 +76,11 @@ class CasdoorConnector extends Connector
     public function webhookApi(): WebhookApi
     {
         return new WebhookApi($this);
+    }
+
+    public function groupApi(): GroupApi
+    {
+        return new GroupApi($this);
     }
 
     public function __construct(?string $client_id = null, ?string $client_secret = null)

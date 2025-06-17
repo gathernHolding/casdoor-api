@@ -28,7 +28,7 @@ class ApiControllerLogin extends MainRequest implements HasBody
     public function __construct(
         protected string $application,
         protected string $username,
-        protected SignInMethod $signinMethod = SignInMethod::VerificationCode,
+        protected SignInMethod $signinMethod = SignInMethod::VERIFICATION_CODE,
         protected LoginType $type = LoginType::TOKEN,
         protected ?string $password = null,
         protected ?string $code = null,

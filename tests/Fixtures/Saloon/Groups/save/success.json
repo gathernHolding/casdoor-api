@@ -1,0 +1,11 @@
+{
+    "statusCode": 200,
+    "headers": {
+        "Content-Length": "99",
+        "Content-Type": "application\/json; charset=utf-8",
+        "Server": "beegoServer:1.12.3",
+        "Set-Cookie": "casdoor_session_id=9e5d5b57a78504b060c18a6ba7b0ca12; Path=\/; Expires=Thu, 17 Jul 2025 13:40:20 GMT; Max-Age=2592000; HttpOnly",
+        "Date": "Tue, 17 Jun 2025 13:40:20 GMT"
+    },
+    "data": "{\n  \"status\": \"ok\",\n  \"msg\": \"\",\n  \"sub\": \"\",\n  \"name\": \"\",\n  \"data\": \"Affected\",\n  \"data2\": null\n}"
+}

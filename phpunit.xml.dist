@@ -5,7 +5,7 @@
             <directory suffix=".php">./src</directory>
         </include>
     </source>
-       <testsuites>
+    <testsuites>
         <testsuite name="Test Suite">
             <directory suffix="Test.php">./tests</directory>
         </testsuite>
@@ -13,9 +13,9 @@
 
     <php>
         <env name="CASDOOR_BASE_URL" value="http://127.0.0.1:8000" force="true" />
-        <env name="AUTH_ORGANIZATION_NAME" value="Gathern_t6og97" force="true" />
-        <env name="AUTH_CLIENT_ID" value="83b5fa28fca00ce7a170" force="true" />
-        <env name="AUTH_CLIENT_SECRET" value="11e649eaa2f84e5fbf54cdc1c0dd58f585724a0f" force="true" />
+        <env name="AUTH_ORGANIZATION_NAME" value="built-in" force="true" />
+        <env name="AUTH_CLIENT_ID" value="85dbbd5ad3bf2209db14" force="true" />
+        <env name="AUTH_CLIENT_SECRET" value="3338adece8580fb5993da89ae70d1487c2226828" force="true" />
     </php>
 
 </phpunit>

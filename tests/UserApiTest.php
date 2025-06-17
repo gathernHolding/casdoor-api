@@ -1,7 +1,11 @@
 <?php
 
 use Gathern\CasdoorAPI\CasdoorConnector;
+use Gathern\CasdoorAPI\Enum\GrantType;
 use Gathern\CasdoorAPI\Enum\ResponseStatus;
+use Gathern\CasdoorAPI\Enum\SignInMethod;
+use Gathern\CasdoorAPI\Requests\LoginApi\ApiControllerLogin;
+use Gathern\CasdoorAPI\Requests\TokenApi\ApiControllerGetOauthToken;
 use Gathern\CasdoorAPI\Requests\UserApi\ApiControllerAddUser;
 use Gathern\CasdoorAPI\Requests\UserApi\ApiControllerSetUserPassword;
 use Saloon\Http\Faking\MockClient;
@@ -48,4 +52,33 @@ describe('UserApiTest', function (): void {
         expect(value: $responseBody->status)->toBe(ResponseStatus::OK);
 
     });
+
+    it('login the user using username and password to get the jwt token succesfully', function () {
+        $this->connector->withMockClient(new MockClient([
+            ApiControllerLogin::class => MockResponse::fixture('Users/login/by-password/ok'),
+        ]));
+        $response = $this->connector->loginApi()->apiControllerLogin(
+            application: 'app-built-in',
+            username: 'admin',
+            signinMethod: SignInMethod::PASSWORD,
+
+            password: '123'
+        );
+
+        expect(value: $response->dto()->status)->toBe(ResponseStatus::OK)
+            ->and($response->dto()->data)->toBeString();
+    });
+
+    it('login the user using client creds to get the jwt token succesfully', function () {
+        $this->connector->withMockClient(new MockClient([
+            ApiControllerGetOauthToken::class => MockResponse::fixture('Users/login/oauth/ok'),
+        ]));
+        $response = $this->connector->TokenApi()->apiControllerGetOauthToken(
+            clientId: getenv('AUTH_CLIENT_ID'),
+            clientSecret: getenv('AUTH_CLIENT_SECRET'),
+            grantType: GrantType::CLIENT_CREDENTIALS,
+        );
+        expect(value: $response->dto()->accessToken)->not->toBeNull();
+    });
+
 });

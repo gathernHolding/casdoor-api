@@ -2,6 +2,7 @@
 
 namespace Gathern\CasdoorAPI\Resource;
 
+use Gathern\CasdoorAPI\Enum\GrantType;
 use Gathern\CasdoorAPI\Requests\TokenApi\ApiControllerAddToken;
 use Gathern\CasdoorAPI\Requests\TokenApi\ApiControllerDeleteToken;
 use Gathern\CasdoorAPI\Requests\TokenApi\ApiControllerGetCaptchaStatus;
@@ -51,19 +52,18 @@ class TokenApi extends Resource
         return $this->connector->send(new ApiControllerGetTokens($owner, $pageSize, $p));
     }
 
-    /**
-     * @param  mixed  $grantType  OAuth grant type
-     * @param  mixed  $clientId  OAuth client id
-     * @param  mixed  $clientSecret  OAuth client secret
-     * @param  mixed  $code  OAuth code
-     */
     public function apiControllerGetOauthToken(
-        mixed $grantType,
-        mixed $clientId,
-        mixed $clientSecret,
-        mixed $code,
+        string $clientId,
+        string $clientSecret,
+        GrantType $grantType = GrantType::AUTHORIZATION_CODE,
+        ?string $code = null,
     ): Response {
-        return $this->connector->send(new ApiControllerGetOauthToken($grantType, $clientId, $clientSecret, $code));
+        return $this->connector->send(new ApiControllerGetOauthToken(
+            clientId: $clientId,
+            clientSecret: $clientSecret,
+            grantType: $grantType,
+            code: $code
+        ));
     }
 
     /**
@@ -80,7 +80,7 @@ class TokenApi extends Resource
         mixed $clientId,
         mixed $clientSecret,
     ): Response {
-        return $this->connector->send(new ApiControllerRefreshToken($grantType, $refreshToken, $scope, $clientId, $clientSecret));
+        return $this->connector->send(new ApiControllerRefreshToken(grantType: $grantType, refreshToken: $refreshToken, scope: $scope, clientId: $clientId, clientSecret: $clientSecret));
     }
 
     /**

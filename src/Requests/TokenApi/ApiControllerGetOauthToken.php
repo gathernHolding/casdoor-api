@@ -2,9 +2,12 @@
 
 namespace Gathern\CasdoorAPI\Requests\TokenApi;
 
-use Gathern\CasdoorAPI\Requests\MainRequest;
+use Gathern\CasdoorAPI\DTO\OauthTokenResponseData;
+use Gathern\CasdoorAPI\Enum\GrantType;
 use Saloon\Contracts\Body\HasBody;
 use Saloon\Enums\Method;
+use Saloon\Http\Request;
+use Saloon\Http\Response;
 use Saloon\Traits\Body\HasJsonBody;
 
 /**
@@ -12,7 +15,7 @@ use Saloon\Traits\Body\HasJsonBody;
  *
  * get OAuth access token
  */
-class ApiControllerGetOauthToken extends MainRequest implements HasBody
+class ApiControllerGetOauthToken extends Request implements HasBody
 {
     use HasJsonBody;
 
@@ -23,26 +26,43 @@ class ApiControllerGetOauthToken extends MainRequest implements HasBody
         return '/api/login/oauth/access_token';
     }
 
-    /**
-     * @param  mixed  $grantType  OAuth grant type
-     * @param  mixed  $clientId  OAuth client id
-     * @param  mixed  $clientSecret  OAuth client secret
-     * @param  mixed  $code  OAuth code
-     */
     public function __construct(
-        protected mixed $grantType,
-        protected mixed $clientId,
-        protected mixed $clientSecret,
-        protected mixed $code,
-    ) {}
+        protected string $clientId,
+        protected string $clientSecret,
+        protected GrantType $grantType = GrantType::AUTHORIZATION_CODE,
+        protected ?string $code = null,
+    ) {
+    }
 
-    public function defaultQuery(): array
+    /**
+     * Summary of defaultBody
+     * @return array<string, mixed>
+     */
+    public function defaultBody(): array
     {
-        return array_filter([
+        return array_filter(array: array_filter(array: [
             'grant_type' => $this->grantType,
             'client_id' => $this->clientId,
             'client_secret' => $this->clientSecret,
             'code' => $this->code,
-        ]);
+        ]));
+    }
+
+    public function createDtoFromResponse(Response $response): OauthTokenResponseData
+    {
+        /**
+         * @var array{access_token?: string, id_token?: string, token_type?: string, expires_in?: int, scope?: string[]|string, refresh_token?: string} $data
+         */
+        $data = $response->json();
+
+        return new OauthTokenResponseData(
+            accessToken: $data['access_token'] ?? null,
+            idToken: $data['id_token'] ?? null,
+            tokenType: $data['token_type'] ?? null,
+            expiresIn: $data['expires_in'] ?? null,
+            scope: is_string($data['scope'] ?? []) ? explode(' ', $data['scope']) : $data['scope'] ?? [],
+            refreshToken: $data['refresh_token'] ?? null,
+
+        );
     }
 }

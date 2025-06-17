@@ -5,5 +5,5 @@ namespace Gathern\CasdoorAPI\Enum;
 enum SignInMethod: string
 {
     case PASSWORD = 'password';
-    case VerificationCode = 'Verification code';
+    case VERIFICATION_CODE = 'verification_code';
 }
