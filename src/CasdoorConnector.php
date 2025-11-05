@@ -11,6 +11,7 @@ use Gathern\CasdoorAPI\Resource\TokenApi;
 use Gathern\CasdoorAPI\Resource\UserApi;
 use Gathern\CasdoorAPI\Resource\VerificationApi;
 use Gathern\CasdoorAPI\Resource\WebhookApi;
+use Gathern\CasdoorAPI\Resource\OidcApi;
 use Saloon\Http\Auth\BasicAuthenticator;
 use Saloon\Http\Connector;
 
@@ -82,6 +83,11 @@ class CasdoorConnector extends Connector
     {
         return new GroupApi($this);
     }
+    public function oidcApi(): OidcApi
+	{
+		return new OidcApi($this);
+	}
+
 
     public function __construct(?string $client_id = null, ?string $client_secret = null)
     {
