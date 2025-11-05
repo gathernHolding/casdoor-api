@@ -1,0 +1,12 @@
+{
+    "statusCode": 200,
+    "headers": {
+        "Content-Length": "1702",
+        "Content-Type": "application\/json; charset=utf-8",
+        "Server": "beegoServer:1.12.3",
+        "Set-Cookie": "casdoor_session_id=2585af7f13cc370c14db055b763db104; Path=\/; Expires=Fri, 05 Dec 2025 14:51:19 GMT; Max-Age=2592000; HttpOnly",
+        "Date": "Wed, 05 Nov 2025 14:51:19 GMT"
+    },
+    "data": "{\n  \"issuer\": \"http:\/\/127.0.0.1:8000\",\n  \"authorization_endpoint\": \"http:\/\/127.0.0.1:8000\/login\/oauth\/authorize\",\n  \"token_endpoint\": \"http:\/\/127.0.0.1:8000\/api\/login\/oauth\/access_token\",\n  \"userinfo_endpoint\": \"http:\/\/127.0.0.1:8000\/api\/userinfo\",\n  \"device_authorization_endpoint\": \"http:\/\/127.0.0.1:8000\/api\/device-auth\",\n  \"jwks_uri\": \"http:\/\/127.0.0.1:8000\/.well-known\/jwks\",\n  \"introspection_endpoint\": \"http:\/\/127.0.0.1:8000\/api\/login\/oauth\/introspect\",\n  \"response_types_supported\": [\n    \"code\",\n    \"token\",\n    \"id_token\",\n    \"code token\",\n    \"code id_token\",\n    \"token id_token\",\n    \"code token id_token\",\n    \"none\"\n  ],\n  \"response_modes_supported\": [\n    \"query\",\n    \"fragment\",\n    \"form_post\"\n  ],\n  \"grant_types_supported\": [\n    \"password\",\n    \"authorization_code\"\n  ],\n  \"subject_types_supported\": [\n    \"public\"\n  ],\n  \"id_token_signing_alg_values_supported\": [\n    \"RS256\",\n    \"RS512\",\n    \"ES256\",\n    \"ES384\",\n    \"ES512\"\n  ],\n  \"scopes_supported\": [\n    \"openid\",\n    \"email\",\n    \"profile\",\n    \"address\",\n    \"phone\",\n    \"offline_access\"\n  ],\n  \"claims_supported\": [\n    \"iss\",\n    \"ver\",\n    \"sub\",\n    \"aud\",\n    \"iat\",\n    \"exp\",\n    \"id\",\n    \"type\",\n    \"displayName\",\n    \"avatar\",\n    \"permanentAvatar\",\n    \"email\",\n    \"phone\",\n    \"location\",\n    \"affiliation\",\n    \"title\",\n    \"homepage\",\n    \"bio\",\n    \"tag\",\n    \"region\",\n    \"language\",\n    \"score\",\n    \"ranking\",\n    \"isOnline\",\n    \"isAdmin\",\n    \"isForbidden\",\n    \"signupApplication\",\n    \"ldap\"\n  ],\n  \"request_parameter_supported\": true,\n  \"request_object_signing_alg_values_supported\": [\n    \"HS256\",\n    \"HS384\",\n    \"HS512\"\n  ],\n  \"end_session_endpoint\": \"http:\/\/127.0.0.1:8000\/api\/logout\"\n}",
+    "context": []
+}
