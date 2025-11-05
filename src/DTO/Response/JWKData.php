@@ -5,7 +5,7 @@ namespace Gathern\CasdoorAPI\DTO\Response;
 class JWKData
 {
     /**
-     * @param string[] $x5c
+     * @param  string[]  $x5c
      */
     public function __construct(
         public string $use,

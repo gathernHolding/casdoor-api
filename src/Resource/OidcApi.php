@@ -13,12 +13,11 @@ class OidcApi extends Resource
 {
     public function rootControllerGetJwks(): Response
     {
-        return $this->connector->send(new RootControllerGetJwks());
+        return $this->connector->send(new RootControllerGetJwks);
     }
-
 
     public function rootControllerGetOidcDiscovery(): Response
     {
-        return $this->connector->send(new RootControllerGetOidcDiscovery());
+        return $this->connector->send(new RootControllerGetOidcDiscovery);
     }
 }

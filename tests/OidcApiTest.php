@@ -7,7 +7,6 @@ use Gathern\CasdoorAPI\Requests\OidcApi\RootControllerGetJwks;
 use Gathern\CasdoorAPI\Requests\OidcApi\RootControllerGetOidcDiscovery;
 use Saloon\Http\Faking\MockClient;
 use Saloon\Http\Faking\MockResponse;
-use Saloon\Http\Response;
 
 describe('OIDCApiTest', function (): void {
 

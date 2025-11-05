@@ -4,24 +4,18 @@ declare(strict_types=1);
 
 namespace Gathern\CasdoorAPI\DTO;
 
-use EventSauce\ObjectHydrator\PropertyCasters\CastListToType;
-use Gathern\CasdoorAPI\DTO\Response\JWKData;
 
-/**
- * @template TData
- * @template TData2
- */
 final class OpenIdConfigurationResponseData
 {
     /**
-     * @param string[] $responseTypesSupported
-     * @param string[] $responseModesSupported
-     * @param string[] $grantTypesSupported
-     * @param string[] $subjectTypesSupported
-     * @param string[] $idTokenSigningAlgValuesSupported
-     * @param string[] $scopesSupported
-     * @param string[] $claimsSupported
-     * @param string[] $requestObjectSigningAlgValuesSupported
+     * @param  string[]  $responseTypesSupported
+     * @param  string[]  $responseModesSupported
+     * @param  string[]  $grantTypesSupported
+     * @param  string[]  $subjectTypesSupported
+     * @param  string[]  $idTokenSigningAlgValuesSupported
+     * @param  string[]  $scopesSupported
+     * @param  string[]  $claimsSupported
+     * @param  string[]  $requestObjectSigningAlgValuesSupported
      */
     public function __construct(
         public string $issuer,
