@@ -66,21 +66,20 @@ class TokenApi extends Resource
         ));
     }
 
-    /**
-     * @param  mixed  $grantType  OAuth grant type
-     * @param  mixed  $refreshToken  OAuth refresh token
-     * @param  mixed  $scope  OAuth scope
-     * @param  mixed  $clientId  OAuth client id
-     * @param  mixed  $clientSecret  OAuth client secret
-     */
     public function apiControllerRefreshToken(
-        mixed $grantType,
-        mixed $refreshToken,
-        mixed $scope,
-        mixed $clientId,
-        mixed $clientSecret,
+        GrantType $grantType,
+        string $refreshToken,
+        ?string $scope = null,
+        ?string $clientId = null,
+        ?string $clientSecret = null,
     ): Response {
-        return $this->connector->send(new ApiControllerRefreshToken(grantType: $grantType, refreshToken: $refreshToken, scope: $scope, clientId: $clientId, clientSecret: $clientSecret));
+        return $this->connector->send(new ApiControllerRefreshToken(
+            grantType: $grantType,
+            refreshToken: $refreshToken,
+            scope: $scope,
+            clientId: $clientId,
+            clientSecret: $clientSecret
+        ));
     }
 
     /**

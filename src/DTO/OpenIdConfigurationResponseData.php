@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Gathern\CasdoorAPI\DTO;
 
-
 final class OpenIdConfigurationResponseData
 {
     /**

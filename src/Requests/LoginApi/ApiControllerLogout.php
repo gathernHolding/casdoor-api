@@ -3,19 +3,15 @@
 namespace Gathern\CasdoorAPI\Requests\LoginApi;
 
 use Gathern\CasdoorAPI\Requests\MainRequest;
-use Saloon\Contracts\Body\HasBody;
 use Saloon\Enums\Method;
-use Saloon\Traits\Body\HasJsonBody;
 
 /**
  * ApiController.Logout
  *
  * logout the current user
  */
-class ApiControllerLogout extends MainRequest implements HasBody
+class ApiControllerLogout extends MainRequest
 {
-    use HasJsonBody;
-
     protected Method $method = Method::POST;
 
     public function resolveEndpoint(): string
@@ -23,21 +19,16 @@ class ApiControllerLogout extends MainRequest implements HasBody
         return '/api/logout';
     }
 
-    /**
-     * @param  null|mixed  $idTokenHint  id_token_hint
-     * @param  null|mixed  $postLogoutRedirectUri  post_logout_redirect_uri
-     * @param  null|mixed  $state  state
-     */
     public function __construct(
-        protected mixed $idTokenHint = null,
-        protected mixed $postLogoutRedirectUri = null,
-        protected mixed $state = null,
+        protected ?string $token,
+        protected ?string $postLogoutRedirectUri = null,
+        protected ?string $state = null,
     ) {}
 
     public function defaultQuery(): array
     {
         return array_filter([
-            'id_token_hint' => $this->idTokenHint,
+            'id_token_hint' => $this->token,
             'post_logout_redirect_uri' => $this->postLogoutRedirectUri,
             'state' => $this->state,
         ]);

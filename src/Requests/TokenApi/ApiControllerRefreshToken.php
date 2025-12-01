@@ -2,20 +2,19 @@
 
 namespace Gathern\CasdoorAPI\Requests\TokenApi;
 
-use Gathern\CasdoorAPI\Requests\MainRequest;
-use Saloon\Contracts\Body\HasBody;
+use Gathern\CasdoorAPI\DTO\OauthTokenResponseData;
+use Gathern\CasdoorAPI\Enum\GrantType;
 use Saloon\Enums\Method;
-use Saloon\Traits\Body\HasJsonBody;
+use Saloon\Http\Request;
+use Saloon\Http\Response;
 
 /**
  * ApiController.RefreshToken
  *
  * refresh OAuth access token
  */
-class ApiControllerRefreshToken extends MainRequest implements HasBody
+class ApiControllerRefreshToken extends Request
 {
-    use HasJsonBody;
-
     protected Method $method = Method::POST;
 
     public function resolveEndpoint(): string
@@ -23,19 +22,12 @@ class ApiControllerRefreshToken extends MainRequest implements HasBody
         return '/api/login/oauth/refresh_token';
     }
 
-    /**
-     * @param  mixed  $grantType  OAuth grant type
-     * @param  mixed  $refreshToken  OAuth refresh token
-     * @param  mixed  $scope  OAuth scope
-     * @param  mixed  $clientId  OAuth client id
-     * @param  null|mixed  $clientSecret  OAuth client secret
-     */
     public function __construct(
-        protected mixed $grantType,
-        protected mixed $refreshToken,
-        protected mixed $scope,
-        protected mixed $clientId,
-        protected mixed $clientSecret = null,
+        protected GrantType $grantType,
+        protected string $refreshToken,
+        protected ?string $clientId,
+        protected ?string $scope = null,
+        protected ?string $clientSecret = null,
     ) {}
 
     public function defaultQuery(): array
@@ -47,5 +39,23 @@ class ApiControllerRefreshToken extends MainRequest implements HasBody
             'client_id' => $this->clientId,
             'client_secret' => $this->clientSecret,
         ]);
+    }
+
+    public function createDtoFromResponse(Response $response): OauthTokenResponseData
+    {
+        /**
+         * @var array{access_token?: string, id_token?: string, token_type?: string, expires_in?: int, scope?: string[]|string, refresh_token?: string} $data
+         */
+        $data = $response->json();
+
+        return new OauthTokenResponseData(
+            accessToken: $data['access_token'] ?? null,
+            idToken: $data['id_token'] ?? null,
+            tokenType: $data['token_type'] ?? null,
+            expiresIn: $data['expires_in'] ?? null,
+            scope: is_string($data['scope'] ?? []) ? explode(' ', $data['scope']) : $data['scope'] ?? [],
+            refreshToken: $data['refresh_token'] ?? null,
+
+        );
     }
 }

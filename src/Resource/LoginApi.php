@@ -80,21 +80,16 @@ class LoginApi extends Resource implements HasBody
         return $this->connector->send(new ApiControllerIntrospectToken);
     }
 
-    /**
-     * @param  mixed  $idTokenHint  id_token_hint
-     * @param  mixed  $postLogoutRedirectUri  post_logout_redirect_uri
-     * @param  mixed  $state  state
-     */
     public function apiControllerLogout(
-        mixed $idTokenHint,
-        mixed $postLogoutRedirectUri,
-        mixed $state
+        string $token,
+        ?string $postLogoutRedirectUri = null,
+        ?string $state = null
     ): Response {
         return $this->connector->send(
-            new ApiControllerLogout(
-                $idTokenHint,
-                $postLogoutRedirectUri,
-                $state
+            request: new ApiControllerLogout(
+                token: $token,
+                postLogoutRedirectUri: $postLogoutRedirectUri,
+                state: $state
             )
         );
     }
