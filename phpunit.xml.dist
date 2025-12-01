@@ -14,8 +14,8 @@
     <php>
         <env name="CASDOOR_BASE_URL" value="http://127.0.0.1:8000" force="true" />
         <env name="AUTH_ORGANIZATION_NAME" value="built-in" force="true" />
-        <env name="AUTH_CLIENT_ID" value="85dbbd5ad3bf2209db14" force="true" />
-        <env name="AUTH_CLIENT_SECRET" value="3338adece8580fb5993da89ae70d1487c2226828" force="true" />
+        <env name="AUTH_CLIENT_ID" value="005a0daec3c9bb9570c6" force="true" />
+        <env name="AUTH_CLIENT_SECRET" value="e0f5673ed2008d8e03c7eaaa0da7ab203dda65ee" force="true" />
     </php>
 
 </phpunit>

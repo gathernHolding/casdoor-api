@@ -29,7 +29,7 @@ class RootControllerGetOidcDiscovery extends Request
         $data = $response->json();
         $mapper = new ObjectMapperUsingReflection;
 
-        return $mapper->hydrateObject(className: OpenIdConfigurationResponseData::class, payload: $data); 
+        return $mapper->hydrateObject(className: OpenIdConfigurationResponseData::class, payload: $data);
     }
 
     public function __construct() {}

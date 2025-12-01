@@ -31,7 +31,7 @@ class RootControllerGetJwks extends Request
         $data = $response->json();
         $mapper = new ObjectMapperUsingReflection;
 
-        return $mapper->hydrateObject(className: JWKResponseData::class, payload: $data); 
+        return $mapper->hydrateObject(className: JWKResponseData::class, payload: $data);
     }
 
     public function __construct() {}
