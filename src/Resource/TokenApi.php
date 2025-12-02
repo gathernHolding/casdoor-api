@@ -67,17 +67,17 @@ class TokenApi extends Resource
     }
 
     public function apiControllerRefreshToken(
-        GrantType $grantType,
         string $refreshToken,
+        string $clientId,
         ?string $scope = null,
-        ?string $clientId = null,
+        GrantType $grantType = GrantType::REFRESH_TOKEN,
         ?string $clientSecret = null,
     ): Response {
         return $this->connector->send(new ApiControllerRefreshToken(
-            grantType: $grantType,
             refreshToken: $refreshToken,
-            scope: $scope,
             clientId: $clientId,
+            grantType: $grantType,
+            scope: $scope,
             clientSecret: $clientSecret
         ));
     }

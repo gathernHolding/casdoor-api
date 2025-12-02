@@ -23,9 +23,9 @@ class ApiControllerRefreshToken extends Request
     }
 
     public function __construct(
-        protected GrantType $grantType,
         protected string $refreshToken,
         protected ?string $clientId,
+        protected GrantType $grantType = GrantType::REFRESH_TOKEN,
         protected ?string $scope = null,
         protected ?string $clientSecret = null,
     ) {}
