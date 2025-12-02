@@ -33,10 +33,10 @@ class ApiControllerRefreshToken extends Request
     public function defaultQuery(): array
     {
         return array_filter([
-            'grant_type' => $this->grantType,
             'refresh_token' => $this->refreshToken,
-            'scope' => $this->scope,
             'client_id' => $this->clientId,
+            'grant_type' => $this->grantType->value,
+            'scope' => $this->scope,
             'client_secret' => $this->clientSecret,
         ]);
     }
