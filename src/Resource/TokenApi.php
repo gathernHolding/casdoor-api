@@ -54,15 +54,19 @@ class TokenApi extends Resource
 
     public function apiControllerGetOauthToken(
         string $clientId,
-        string $clientSecret,
+        ?string $clientSecret=null,
         GrantType $grantType = GrantType::AUTHORIZATION_CODE,
         ?string $code = null,
+        ?string  $username = null,
+        ?string  $password = null,
     ): Response {
         return $this->connector->send(new ApiControllerGetOauthToken(
             clientId: $clientId,
             clientSecret: $clientSecret,
             grantType: $grantType,
-            code: $code
+            code: $code,
+            username: $username,
+            password: $password
         ));
     }
 

@@ -94,6 +94,20 @@ describe('UserApiTest', function (): void {
         expect(value: $response->dto()->accessToken)->not->toBeNull();
     });
 
+    it('login the user using username and password creds to get the jwt token succesfully', function (): void {
+        $this->connector->withMockClient(new MockClient([
+            ApiControllerGetOauthToken::class => MockResponse::fixture('Users/login/oauth/ok-using-username-password'),
+        ]));
+        $response = $this->connector->TokenApi()->apiControllerGetOauthToken(
+            clientId: getenv('AUTH_CLIENT_ID'),
+            grantType: GrantType::CLIENT_CREDENTIALS,
+            username: 'local_organization_8256cc36-347c-47d5-ab43-0e9eb7b346dd',
+            password: '123456',
+        );
+        expect(value: $response->dto()->accessToken)->not->toBeNull();
+    });
+
+
     it('can not logout user using invalid token  ', function (): void {
         $this->connector->withMockClient(new MockClient([
             ApiControllerLogout::class => MockResponse::fixture('Users/logout/error'),

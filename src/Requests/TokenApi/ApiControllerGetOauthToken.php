@@ -28,9 +28,11 @@ class ApiControllerGetOauthToken extends Request implements HasBody
 
     public function __construct(
         protected string $clientId,
-        protected string $clientSecret,
+        protected ?string $clientSecret = null,
         protected GrantType $grantType = GrantType::AUTHORIZATION_CODE,
         protected ?string $code = null,
+        protected ?string  $username = null,
+        protected ?string  $password = null,
     ) {}
 
     /**
@@ -45,6 +47,8 @@ class ApiControllerGetOauthToken extends Request implements HasBody
             'client_id' => $this->clientId,
             'client_secret' => $this->clientSecret,
             'code' => $this->code,
+            'username' => $this->username,
+            'password' => $this->password,
         ]));
     }
 
